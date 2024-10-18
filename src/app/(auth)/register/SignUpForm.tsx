@@ -2,17 +2,19 @@
 import { Button } from "@/components/Button";
 import { FormField, FormItem, FormMessage } from "@/components/form/Form";
 import { Input } from "@/components/form/Input";
-import { Checkbox } from "@radix-ui/themes";
 import { FormProvider, useForm } from "react-hook-form";
 
-function LoginForm() {
+function SignUpForm() {
   const form = useForm({
     mode: "all",
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
+
+  const password = form.watch("password");
 
   const onSubmit = () => {};
 
@@ -30,7 +32,15 @@ function LoginForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <Input type="email" placeholder="Email" {...field} />
+              <Input
+                type="email"
+                placeholder="Email"
+                color="red"
+                // className={`${
+                //   form.formState.errors["email"] && "border-[1px] border-error"
+                // }`}
+                {...field}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -40,6 +50,10 @@ function LoginForm() {
           name="password"
           rules={{
             required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
           }}
           render={({ field }) => (
             <FormItem>
@@ -54,24 +68,33 @@ function LoginForm() {
           )}
         />
 
-        <div className="flex flex-row justify-center items-center">
-          <Checkbox
-            defaultChecked
-            id="save-account"
-            size="2"
-            className="mr-2 bg-inputColor w-[20px] h-[20px] flex justify-center items-center rounded"
-          />
-          <label htmlFor="save-account" className="text-sm">
-            Remember me
-          </label>
-        </div>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          rules={{
+            required: "Confirmation password is required",
+            validate: (value: string) =>
+              value === password || "Confirmation password is incorrect",
+          }}
+          render={({ field }) => (
+            <FormItem>
+              <Input
+                type="password"
+                placeholder="Confirmation"
+                className="w-full"
+                {...field}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button type="submit" variant="contained" className="w-full">
-          <span className="text-base">Login</span>
+          <span className="text-base">Register</span>
         </Button>
       </form>
     </FormProvider>
   );
 }
 
-export default LoginForm;
+export default SignUpForm;
