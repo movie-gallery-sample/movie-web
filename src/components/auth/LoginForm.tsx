@@ -1,14 +1,40 @@
 "use client";
 
+import { authService } from "@/app/(auth)/queries/authService";
 import { Button } from "@/components/Button";
 import { FormField, FormItem, FormMessage } from "@/components/form/Form";
 import { Input } from "@/components/form/Input";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "@/constants";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "@/lib/constants";
+import { LoginPayload, LoginResponseResult } from "@/types/auth";
 import { Checkbox } from "@radix-ui/themes";
-
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 function LoginForm() {
+  const router = useRouter();
+  const { mutate: login, isPending } = useMutation<
+    LoginResponseResult,
+    Error,
+    LoginPayload
+  >({
+    mutationFn: async (credentials) => {
+      const response = await authService.login(credentials);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      const accessToken = data.accessToken;
+      localStorage.setItem("access_token", accessToken);
+      router.push("/movies");
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError)
+        toast.error(error.response?.data.message);
+    },
+  });
+
   const form = useForm({
     mode: "onSubmit",
     defaultValues: {
@@ -17,7 +43,9 @@ function LoginForm() {
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = (data: LoginPayload) => {
+    login(data);
+  };
 
   return (
     <FormProvider {...form}>
@@ -78,7 +106,12 @@ function LoginForm() {
           </label>
         </div>
 
-        <Button type="submit" variant="contained" className="w-full">
+        <Button
+          type="submit"
+          variant="contained"
+          className="w-full"
+          isLoading={isPending}
+        >
           <span className="text-base">Login</span>
         </Button>
       </form>
