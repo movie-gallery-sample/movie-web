@@ -1,3 +1,5 @@
+"use client";
+
 type VariantType = "contained-primary";
 
 type ButtonProps = {
@@ -36,9 +38,9 @@ export const Button = (props: ButtonProps) => {
       onClick={onClick && onClick}
     >
       {isLoading ? (
-        <>
-          <span className="pl-2">Loading...</span>
-        </>
+        <div className="pl-2">
+          <span className="text-base pl-2">Loading...</span>
+        </div>
       ) : (
         children
       )}

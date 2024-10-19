@@ -39,3 +39,9 @@ body {
 .wavy-curve {
   clip-path: path("M0,45 C480,120 960,8 2000,64 L2000,320 L0,320 Z");
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px var(--inputColor) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
+}

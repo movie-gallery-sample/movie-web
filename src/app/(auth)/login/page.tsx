@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LoginForm from "./LoginForm";
+import LoginForm from "../../../components/auth/LoginForm";
 
 function LoginPage() {
   return (
@@ -7,7 +7,7 @@ function LoginPage() {
       <h1 className="text-4xl font-semibold mb-2">Sign in</h1>
       <LoginForm />
       <div className="flex items-center justify-center gap-2 pt-6">
-        <span className="text-sm">Don't have an account?</span>
+        <span className="text-sm">Do not have an account?</span>
         <Link
           href="/register"
           className="text-base text-primary hover:text-primaryHover"
