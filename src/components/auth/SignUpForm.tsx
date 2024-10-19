@@ -3,12 +3,13 @@ import { authService } from "@/app/(auth)/queries/authService";
 import { Button } from "@/components/Button";
 import { FormField, FormItem, FormMessage } from "@/components/form/Form";
 import { Input } from "@/components/form/Input";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "@/constants";
+import { EMAIL_REGEX, PASSWORD_REGEX } from "@/lib/constants";
 import { SignUpPayload, SignUpResponseResult } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 function SignUpForm() {
   const form = useForm({
@@ -34,7 +35,8 @@ function SignUpForm() {
       router.push("/login");
     },
     onError: (error) => {
-      alert((error as AxiosError)?.response?.data);
+      if (error instanceof AxiosError)
+        toast.error(error.response?.data.message);
     },
   });
 
