@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const client = axios.create({
+export const privateClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
   timeout: Number(process.env.API_TIMEOUT) || 15000,
 });
@@ -21,7 +21,7 @@ const client = axios.create({
 //   (error) => Promise.reject(error)
 // );
 
-client.interceptors.response.use(
+privateClient.interceptors.response.use(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (response: AxiosResponse<any>) => {
     return response;
@@ -35,5 +35,5 @@ client.interceptors.response.use(
 );
 
 export function setToken(token: string) {
-  client.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  privateClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }

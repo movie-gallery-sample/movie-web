@@ -10,7 +10,7 @@ function LoginPage() {
         <span className="text-sm">Do not have an account?</span>
         <Link
           href="/register"
-          className="text-base text-primary hover:text-primaryHover"
+          className="text-regular text-primary hover:text-primaryHover"
         >
           Sign up
         </Link>

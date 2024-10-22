@@ -1,32 +1,147 @@
-import Link from "next/link";
+"use client";
+
+import { Button } from "@/components/Button";
+import MovieCard from "@/components/movie/MovieCard";
+import Pagination from "@/components/Pagination";
+import { movieApi } from "@/features/movie/movieApi";
+import { Movie } from "@/types/movie";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { CirclePlus, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 function MoviesList() {
-  const movies = [
+  const router = useRouter();
+  const [page, setPage] = useState<number>(1);
+  const [limit] = useState<number>(8);
+
+  const { data, isError, error } = useQuery({
+    queryKey: ["movies"],
+    queryFn: async () => {
+      const response = await movieApi.getMovies();
+      return response;
+    },
+  });
+
+  useEffect(() => {
+    if (isError && error instanceof AxiosError) {
+      toast.error(error?.response?.data.message);
+    }
+  }, [isError]);
+
+  console.log(data);
+
+  const movies: Movie[] = [
     {
-      name: "movie 1",
-      link: "/movie-1",
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
     },
     {
-      name: "movie 2",
-      link: "/movie-2",
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
     },
     {
-      name: "movie 3",
-      link: "/movie-3",
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
+    },
+    {
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
+    },
+    {
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
+    },
+    {
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
+    },
+    {
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
+    },
+    {
+      title: "movie 1",
+      id: "/movie-1",
+      poster: "df",
+      year: "2021",
     },
   ];
 
   return (
-    <>
-      <h6>List of movies</h6>
-      <ol>
-        {movies.map((item, index) => (
-          <li key={index}>
-            <Link href={`movies${item.link}`}>{item.name}</Link>
-          </li>
-        ))}
-      </ol>
-    </>
+    <div className="w-full min-h-[calc(100vh-90px)] flex flex-col justify-center items-center ">
+      {movies?.length === 0 ? (
+        <div className="text-center translate-y-1/4 ">
+          <h3 className="md:text-4xl font-semibold mb-10">
+            Your movie list is empty
+          </h3>
+          <Button
+            className="w-auto m-auto"
+            onClick={() => router.push("/movies/add")}
+          >
+            Add a new movie
+          </Button>
+        </div>
+      ) : (
+        <div className="px-6 md:w-[88%] py-20 flex flex-col flex-grow justify-start gap-20 md:gap-30">
+          <div className="flex flex-row justify-between">
+            <div className="flex flex-row items-center gap-3">
+              <h3 className="max-xs:text-3xl md:text-4xl font-semibold">
+                Your movies
+              </h3>
+              <button
+                onClick={() => {
+                  router.push("/movies/add");
+                }}
+                className="translate-y-[20%]"
+              >
+                <CirclePlus className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]" />
+              </button>
+            </div>
+
+            <div className="flex flex-row items-center gap-3  text-center translate-y-[12.5%]">
+              <p className="text-regular font-bold max-sm:hidden">Logout</p>
+              <button onClick={() => {}}>
+                <LogOut className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]" />
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            {movies.map((movie, index) => (
+              <MovieCard key={index} {...movie} />
+            ))}
+          </div>
+
+          <Pagination
+            className="w-fit m-auto"
+            data={movies}
+            options={{
+              pageSize: limit,
+              totalCount: 20,
+              currentPage: page,
+              siblingCount: 2,
+              setPage,
+            }}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 

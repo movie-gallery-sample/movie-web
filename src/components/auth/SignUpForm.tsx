@@ -1,5 +1,5 @@
 "use client";
-import { authService } from "@/app/(auth)/queries/authService";
+import { authApi } from "@/features/auth/authApi";
 import { Button } from "@/components/Button";
 import { FormField, FormItem, FormMessage } from "@/components/form/Form";
 import { Input } from "@/components/form/Input";
@@ -28,7 +28,7 @@ function SignUpForm() {
     SignUpPayload
   >({
     mutationFn: async (credentials) => {
-      const response = await authService.signUp(credentials);
+      const response = await authApi.signUp(credentials);
       return response.data;
     },
     onSuccess: () => {
@@ -124,7 +124,7 @@ function SignUpForm() {
           className="w-full"
           isLoading={isPending}
         >
-          <span className="text-base">Register</span>
+          <span className="text-regular">Register</span>
         </Button>
       </form>
     </FormProvider>

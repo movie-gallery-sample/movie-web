@@ -1,6 +1,6 @@
 "use client";
 
-import { authService } from "@/app/(auth)/queries/authService";
+import { authApi } from "@/features/auth/authApi";
 import { Button } from "@/components/Button";
 import { FormField, FormItem, FormMessage } from "@/components/form/Form";
 import { Input } from "@/components/form/Input";
@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { setToken } from "@/lib/apiClient/privateClient";
 
 function LoginForm() {
   const router = useRouter();
@@ -21,12 +22,13 @@ function LoginForm() {
     LoginPayload
   >({
     mutationFn: async (credentials) => {
-      const response = await authService.login(credentials);
+      const response = await authApi.login(credentials);
       return response.data;
     },
     onSuccess: (data) => {
       const accessToken = data.accessToken;
       localStorage.setItem("access_token", accessToken);
+      setToken(accessToken);
       router.push("/movies");
     },
     onError: (error) => {
@@ -112,7 +114,7 @@ function LoginForm() {
           className="w-full"
           isLoading={isPending}
         >
-          <span className="text-base">Login</span>
+          <span className="text-regular">Login</span>
         </Button>
       </form>
     </FormProvider>

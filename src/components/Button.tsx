@@ -39,7 +39,7 @@ export const Button = (props: ButtonProps) => {
     >
       {isLoading ? (
         <div className="pl-2">
-          <span className="text-base pl-2">Loading...</span>
+          <span className="text-regular pl-2">Loading...</span>
         </div>
       ) : (
         children

@@ -12,7 +12,7 @@ function RegisterPage() {
         <span className="text-sm">Already have an account?</span>
         <Link
           href="/login"
-          className="text-base text-primary hover:text-primaryHover"
+          className="text-regular text-primary hover:text-primaryHover"
         >
           Log in
         </Link>

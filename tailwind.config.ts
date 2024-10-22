@@ -8,15 +8,23 @@ const config: Config = {
   ],
   theme: {
     fontSize: {
+      caption: ["14px", "16px"],
       xs: ["12px", "24px"],
       sm: ["14px", "24px"],
-      base: ["16px", "24px"],
+      regular: ["16px", "24px"],
       lg: ["20px", "24px"],
       xl: ["20px", "32px"],
       "2xl": ["24px", "32px"],
       "3xl": ["32px", "40px"],
       "4xl": ["48px", "56px"],
       "6xl": ["64px", "80px"],
+    },
+    screens: {
+      xs: "480px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1440px",
     },
     extend: {
       colors: {
