@@ -16,3 +16,8 @@ export interface SignUpPayload {
 export interface SignUpResponseResult {
   accessToken: string;
 }
+
+export interface User {
+  id?: string;
+  email?: string;
+}

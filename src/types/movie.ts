@@ -22,3 +22,10 @@ export interface Params {
   sort?: SortType;
   order?: Order;
 }
+
+export interface MoviesResult {
+  data: Movie[];
+  total: number;
+  page: number;
+  lastPage: number;
+}

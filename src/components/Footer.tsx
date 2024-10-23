@@ -8,7 +8,7 @@ import useWindowSize from "@/lib/hooks/useWindowSize";
 function Footer() {
   const { width: windowWidth } = useWindowSize();
 
-  console.log(windowWidth);
+ 
 
   return (
     <>
