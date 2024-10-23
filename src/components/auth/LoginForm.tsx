@@ -9,13 +9,14 @@ import { LoginPayload, LoginResponseResult } from "@/types/auth";
 import { Checkbox } from "@radix-ui/themes";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { setToken } from "@/lib/apiClient/privateClient";
+import { useAuth } from "../provider/AuthProvider";
+import { useState } from "react";
 
 function LoginForm() {
-  const router = useRouter();
+  const { login: loginWithToken } = useAuth();
+  const [shouldRemember, setShouldRemember] = useState<boolean>(false);
   const { mutate: login, isPending } = useMutation<
     LoginResponseResult,
     Error,
@@ -26,10 +27,10 @@ function LoginForm() {
       return response.data;
     },
     onSuccess: (data) => {
-      const accessToken = data.accessToken;
-      localStorage.setItem("access_token", accessToken);
-      setToken(accessToken);
-      router.push("/movies");
+      loginWithToken(data);
+      if (shouldRemember) {
+        localStorage.setItem("refresh_token", data.refreshToken);
+      }
     },
     onError: (error) => {
       if (error instanceof AxiosError)
@@ -98,7 +99,10 @@ function LoginForm() {
 
         <div className="flex flex-row justify-center items-center">
           <Checkbox
-            defaultChecked
+            value={shouldRemember ? "checked" : "unchecked"}
+            onClick={() => {
+              setShouldRemember((prev) => !prev);
+            }}
             id="save-account"
             size="2"
             className="mr-2 bg-inputColor w-[20px] h-[20px] flex justify-center items-center rounded"

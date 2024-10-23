@@ -11,13 +11,12 @@ import { CirclePlus, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Movie, MoviesResult } from "@/types/movie";
+import { MoviesResult } from "@/types/movie";
 import { authApi } from "@/features/auth/authApi";
-import { queryClient } from "@/components/provider";
 import { AuthContext } from "@/components/provider/AuthProvider";
 
 function MoviesList() {
-  const { setUser } = useContext(AuthContext);
+  const { logout: clientLogout } = useContext(AuthContext);
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const [limit] = useState<number>(8);
@@ -37,11 +36,7 @@ function MoviesList() {
       return response;
     },
     onSuccess: () => {
-      queryClient.removeQueries();
-      setUser({});
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
-      router.push("/login");
+      clientLogout();
     },
     onError: (error) => {
       if (error instanceof AxiosError) {

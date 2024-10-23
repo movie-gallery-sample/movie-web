@@ -4,7 +4,9 @@ export interface LoginPayload {
 }
 
 export interface LoginResponseResult {
+  email: string;
   accessToken: string;
+  refreshToken: string;
 }
 
 export interface SignUpPayload {
@@ -20,4 +22,5 @@ export interface SignUpResponseResult {
 export interface User {
   id?: string;
   email?: string;
+  accessToken?: string;
 }

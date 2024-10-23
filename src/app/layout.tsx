@@ -17,7 +17,9 @@ export default function RootLayout({
       <body
         className={`font-sans antialiased text-white h-screen flex flex-col justify-between`}
       >
-        <Provider>{children}</Provider>
+        <Provider>
+          <div className="h-screen">{children}</div>
+        </Provider>
         <Footer />
       </body>
     </html>
