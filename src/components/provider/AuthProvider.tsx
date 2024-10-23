@@ -1,19 +1,20 @@
 "use client";
 
 import { User } from "@/types/auth";
-import { createContext, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 
 interface AuthContextType {
-  user: User | undefined;
-  setUser: (user: User) => void;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User>>;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  setUser: () => {},
+});
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User>({});
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

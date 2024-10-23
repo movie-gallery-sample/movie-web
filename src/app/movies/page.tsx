@@ -5,15 +5,19 @@ import MovieCard from "@/components/movie/MovieCard";
 import Pagination from "@/components/Pagination";
 import { movieApi } from "@/features/movie/movieApi";
 import Spinner from "@/components/Spinner";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { CirclePlus, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { MoviesResult } from "@/types/movie";
+import { Movie, MoviesResult } from "@/types/movie";
+import { authApi } from "@/features/auth/authApi";
+import { queryClient } from "@/components/provider";
+import { AuthContext } from "@/components/provider/AuthProvider";
 
 function MoviesList() {
+  const { setUser } = useContext(AuthContext);
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const [limit] = useState<number>(8);
@@ -27,13 +31,32 @@ function MoviesList() {
     refetchOnWindowFocus: false,
   });
 
+  const { mutate: logout } = useMutation({
+    mutationFn: async () => {
+      const response = await authApi.logout();
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.removeQueries();
+      setUser({});
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      router.push("/login");
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      }
+    },
+  });
+
   const { data: movies } = data || {};
 
   useEffect(() => {
     if (isError && error instanceof AxiosError) {
       toast.error(error?.response?.data.message);
     }
-  }, [isError]);
+  }, [isError, error]);
 
   return (
     <div className="w-full min-h-[calc(100vh-90px)] flex flex-col justify-center items-center ">
@@ -69,12 +92,15 @@ function MoviesList() {
                   </button>
                 </div>
 
-                <div className="flex flex-row items-center gap-3  text-center translate-y-[12.5%]">
+                {/* <div className="flex flex-row items-center gap-3  text-center translate-y-[12.5%]"> */}
+                <button
+                  onClick={() => logout()}
+                  className="flex flex-row items-center gap-3  text-center translate-y-[12.5%]"
+                >
                   <p className="text-regular font-bold max-sm:hidden">Logout</p>
-                  <button onClick={() => {}}>
-                    <LogOut className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]" />
-                  </button>
-                </div>
+                  <LogOut className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]" />
+                </button>
+                {/* </div> */}
               </div>
               <div className="flex flex-wrap gap-4 justify-center">
                 {movies?.length &&
