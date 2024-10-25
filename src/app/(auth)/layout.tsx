@@ -1,5 +1,3 @@
-"use client";
-
 import { redirect } from "next/navigation";
 
 type Props = {
@@ -15,9 +13,9 @@ function AuthLayout({ children }: Props) {
   }
 
   return (
-    <div className="relative w-full h-[calc(100vh-50px)] md:h-[calc(100vh-100px)] flex flex-col justify-center items-center">
+    <main className="relative w-full h-[calc(100vh-50px)] md:h-[calc(100vh-100px)] flex flex-col justify-center items-center">
       {children}
-    </div>
+    </main>
   );
 }
 

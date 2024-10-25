@@ -1,8 +1,8 @@
 "use client";
 import { authApi } from "@/features/auth/authApi";
 import { Button } from "@/components/Button";
-import { FormField, FormItem, FormMessage } from "@/components/form/Form";
-import { Input } from "@/components/form/Input";
+import { FormField, FormItem, FormMessage } from "@/components/auth/form/Form";
+import { Input } from "@/components/auth/form/Input";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "@/lib/constants";
 import { SignUpPayload, SignUpResponseResult } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";

@@ -6,7 +6,7 @@ type ButtonProps = {
   children: React.ReactNode;
   className?: string;
   variant?: "contained" | "outlined";
-  color?: "primary";
+  color?: "primary" | "white";
   isLoading?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
@@ -26,6 +26,10 @@ export const Button = (props: ButtonProps) => {
   } = props;
   const btnStyles = {
     "contained-primary": "bg-primary text-white hover:bg-primaryHover",
+    "outlined-primary":
+      "bg-transparent border border-primary text-white hover:bg-primaryHover",
+    "outlined-white":
+      "bg-transparent border border-white text-white hover:bg-inputColor",
   };
 
   const variantType = (variant + "-" + color) as VariantType;

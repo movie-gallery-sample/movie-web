@@ -29,3 +29,5 @@ export interface MoviesResult {
   page: number;
   lastPage: number;
 }
+
+export type MoviePayload = Omit<Movie, "id">;
