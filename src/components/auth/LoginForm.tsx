@@ -2,8 +2,8 @@
 
 import { authApi } from "@/features/auth/authApi";
 import { Button } from "@/components/Button";
-import { FormField, FormItem, FormMessage } from "@/components/auth/form/Form";
-import { Input } from "@/components/auth/form/Input";
+import { FormField, FormItem, FormMessage } from "@/components/form/Form";
+import { Input } from "@/components/form/Input";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "@/lib/constants";
 import { LoginPayload, LoginResponseResult } from "@/types/auth";
 import { Checkbox } from "@radix-ui/themes";

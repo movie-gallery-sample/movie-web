@@ -1,6 +1,6 @@
 export interface FileUpload {
-  message: string;
-  filename: string;
+  message?: string;
+  filename?: string;
   path: string;
 }
 

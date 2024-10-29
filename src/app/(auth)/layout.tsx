@@ -1,14 +1,18 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 type Props = {
   children: React.ReactElement;
 };
 
 function AuthLayout({ children }: Props) {
+  const router = useRouter();
+
   if (typeof window !== "undefined") {
     const accessToken = localStorage.getItem("access_token");
     if (accessToken) {
-      redirect("/movies");
+      router.push("/movies");
     }
   }
 

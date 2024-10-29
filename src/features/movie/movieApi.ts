@@ -1,21 +1,21 @@
 import { privateClient } from "@/lib/apiClient/privateClient";
-import { MoviePayload } from "@/types/movie";
+import { MoviePayload, Params } from "@/types/movie";
 
 export const movieApi = {
-  getMovies: async () => {
-    const response = await privateClient.get("/movies?page=1&limit=8");
+  getMovies: async (params: Params) => {
+    const response = await privateClient.get("/movies", { params });
+    return response;
+  },
+  getMovie: async (id: string | string[]) => {
+    const response = await privateClient.get(`/movies/${id}`);
     return response;
   },
   addMovie: async (data: MoviePayload) => {
-    const response = await privateClient.post("/movies", {
-      data,
-    });
+    const response = await privateClient.post("/movies", data);
     return response;
   },
-  editMovie: async (data: MoviePayload, id: string) => {
-    const response = await privateClient.patch(`/movies/${id}`, {
-      data,
-    });
+  editMovie: async (data: MoviePayload, id: string | string[]) => {
+    const response = await privateClient.patch(`/movies/${id}`, data);
     return response;
   },
   removeMovie: async (id: string) => {

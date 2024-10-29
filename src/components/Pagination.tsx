@@ -25,9 +25,6 @@ const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
     currentPage,
   });
 
-  if (currentPage === 0 || (paginationRange && paginationRange.length < 2))
-    return null;
-
   const onNext = () => {
     setPage(currentPage + 1);
   };
@@ -40,6 +37,7 @@ const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
     paginationRange && paginationRange[paginationRange.length - 1];
 
   if (!data?.length) return;
+
   return (
     <div
       className={cn(
@@ -47,16 +45,13 @@ const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
         className
       )}
     >
-      {currentPage !== 1 && (
-        <button
-          onClick={onPrevious}
-          disabled={currentPage === 1}
-          className={cn("mx-2")}
-        >
-          Prev
-        </button>
-      )}
-
+      <button
+        onClick={onPrevious}
+        disabled={currentPage === 1}
+        className={cn("mx-2")}
+      >
+        Prev
+      </button>
       {paginationRange?.map((pageNumber) => {
         if (pageNumber === "...") {
           return (
@@ -80,15 +75,13 @@ const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
         );
       })}
 
-      {currentPage !== lastPage && (
-        <button
-          onClick={onNext}
-          disabled={currentPage === lastPage}
-          className={cn("mx-2")}
-        >
-          <p>Next</p>
-        </button>
-      )}
+      <button
+        onClick={onNext}
+        disabled={currentPage === lastPage}
+        className={cn("mx-2")}
+      >
+        <p>Next</p>
+      </button>
     </div>
   );
 };

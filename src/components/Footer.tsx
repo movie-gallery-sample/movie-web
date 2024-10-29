@@ -8,8 +8,6 @@ import useWindowSize from "@/lib/hooks/useWindowSize";
 function Footer() {
   const { width: windowWidth } = useWindowSize();
 
- 
-
   return (
     <>
       {windowWidth === 0 ? null : windowWidth < 640 ? (
@@ -18,6 +16,7 @@ function Footer() {
           alt="curved-line-1"
           className="object-contain w-full justify-self-end"
           height={100}
+          priority
         />
       ) : (
         <Image
@@ -25,6 +24,7 @@ function Footer() {
           alt="curved-line-1"
           className="object-contain w-full justify-self-end"
           height={100}
+          priority
         />
       )}
     </>

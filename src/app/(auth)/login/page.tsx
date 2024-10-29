@@ -3,7 +3,7 @@ import LoginForm from "../../../components/auth/LoginForm";
 
 function LoginPage() {
   return (
-    <div className="flex flex-col items-center text-white sm:w-[300px] w-[88%]">
+    <div className="flex flex-col items-center text-white sm:w-[300px] max-sm:w-full max-sm:px-6">
       <h1 className="text-4xl font-semibold mb-2">Sign in</h1>
       <LoginForm />
       <div className="flex items-center justify-center gap-2 pt-6">

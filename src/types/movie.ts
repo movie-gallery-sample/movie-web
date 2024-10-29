@@ -1,8 +1,8 @@
 export interface Movie {
   id: string;
   title: string;
-  year: string;
-  poster: string;
+  publishingYear: number | undefined;
+  posterUrl: string;
 }
 
 export enum Order {
