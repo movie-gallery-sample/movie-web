@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.DEPLOYMENT_USERNAME }}
           key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
           source: "build.tar.gz"
-          target: "/tmp/build.tar.gz"
+          target: "/tmp"
 
       - name: Deploy using ssh
         uses: appleboy/ssh-action@v1.0.3
