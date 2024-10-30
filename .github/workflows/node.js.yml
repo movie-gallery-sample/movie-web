@@ -52,3 +52,4 @@ jobs:
             cd /var/www/demo.lettutor.com/movie-web
             rm -rf node_modules
             npm install --omit=dev
+            pm2 restart movie-web
