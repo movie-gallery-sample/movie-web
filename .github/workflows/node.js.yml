@@ -54,4 +54,4 @@ jobs:
           script: |
             tar -xzvf /tmp/build.tar.gz -C /var/www/demo.lettutor.com/movie-web
             cd /var/www/demo.lettutor.com/movie-web
-            npm install
+            npm install --production
