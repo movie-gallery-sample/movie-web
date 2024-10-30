@@ -36,6 +36,15 @@ jobs:
       - name: Archive build files
         run: tar -czf build.tar.gz .next public package.json
 
+      - name: Upload build files to VPS
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.DEPLOYMENT_HOST }}
+          username: ${{ secrets.DEPLOYMENT_USERNAME }}
+          key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
+          source: "build.tar.gz"
+          target: "/tmp/build.tar.gz"
+
       - name: Deploy using ssh
         uses: appleboy/ssh-action@v1.0.3
         with:
