@@ -52,6 +52,8 @@ jobs:
           username: ${{ secrets.DEPLOYMENT_USERNAME }}
           key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
           script: |
+            npm cache clean --force
             tar -xzvf /tmp/build.tar.gz -C /var/www/demo.lettutor.com/movie-web
             cd /var/www/demo.lettutor.com/movie-web
+            rm -rf node_modules
             npm install --omit=dev
