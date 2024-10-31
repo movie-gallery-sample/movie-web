@@ -3,9 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3001",
+        protocol: 'https',
+        hostname: "api.demo.lettutor.com",
         pathname: "/uploads/**",
       },
     ],

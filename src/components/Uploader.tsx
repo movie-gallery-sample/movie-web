@@ -36,7 +36,7 @@ function Uploader(props: Props) {
     },
     onSuccess: (data) => {
       setTimeout(() => {
-        const urlSegments = data?.path?.split("\\");
+        const urlSegments = data?.path?.split("/");
         const imageUrl = urlSegments
           ? process.env.NEXT_PUBLIC_API_IMAGE +
             urlSegments[urlSegments.length - 1]
