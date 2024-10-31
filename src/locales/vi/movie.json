@@ -1,0 +1,19 @@
+{
+  "Create a new movie": "Tạo một bộ phim",
+  "Edit": "Chỉnh sửa",
+  "Drop an image here": "Thả một ảnh vào đây",
+  "Drop other image here": "Thả ảnh khác vào đây",
+  "Title": "Tên phim",
+  "Publishing year": "Ngày phát hành",
+  "Cancel": "Hủy",
+  "Submit": "Tạo",
+  "Update": "Cập nhật",
+  "Email is required": "Vui lòng nhập email",
+  "Password is required": "Vui lòng nhập mật khẩu",
+  "Invalid email": "Email không hợp lệ",
+  "Movie added successfully": "Thêm phim thành công",
+  "Movie edited successfully": "Chỉnh sửa phim thành công",
+  "Poster is required": "Vui lòng tải ảnh bìa",
+  "Title is required": "Vui lòng nhập tên phim",
+  "Publishing year is required": "Vui lòng nhập năm phát hành"
+}

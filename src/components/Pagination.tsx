@@ -3,6 +3,7 @@
 import { usePagination } from "@/lib/hooks/usePagination";
 import { cn } from "@/lib/utils";
 import { Ellipsis } from "lucide-react";
+// import { useTranslation } from "react-i18next";
 
 interface Props<T> {
   className?: string;
@@ -16,6 +17,7 @@ interface Props<T> {
   };
 }
 const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
+  // const { t } = useTranslation("Pagination");
   const { setPage, currentPage, pageSize, totalCount, siblingCount } = options;
 
   const paginationRange = usePagination({
@@ -80,7 +82,7 @@ const Pagination = <T,>({ className, data = [], options }: Props<T>) => {
         disabled={currentPage === lastPage}
         className={cn("mx-2")}
       >
-        <p>Next</p>
+        Next
       </button>
     </div>
   );

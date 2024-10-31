@@ -14,8 +14,10 @@ import { toast } from "sonner";
 import { MoviesResult } from "@/types/movie";
 import { authApi } from "@/features/auth/authApi";
 import { AuthContext } from "@/components/provider/AuthProvider";
+// import { useTranslation } from "react-i18next";
 
 function MoviesList() {
+  // const { t } = useTranslation("home");
   const { logout: clientLogout } = useContext(AuthContext);
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
@@ -75,7 +77,7 @@ function MoviesList() {
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row items-center gap-3">
                   <h3 className="max-xs:text-3xl md:text-4xl font-semibold">
-                    Your movies
+                    My movies
                   </h3>
                   <button
                     onClick={() => {

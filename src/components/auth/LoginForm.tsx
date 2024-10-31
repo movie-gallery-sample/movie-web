@@ -13,8 +13,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useAuth } from "../provider/AuthProvider";
 import { useState } from "react";
+// import { useTranslation } from "react-i18next";
 
 function LoginForm() {
+  // const { t } = useTranslation("auth");
   const { login: loginWithToken } = useAuth();
   const [shouldRemember, setShouldRemember] = useState<boolean>(false);
   const { mutate: login, isPending } = useMutation<
@@ -68,7 +70,7 @@ function LoginForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <Input type="email" placeholder="Email" {...field} />
+              <Input type="email" placeholder={"Email"} {...field} />
               <FormMessage />
             </FormItem>
           )}
@@ -80,15 +82,14 @@ function LoginForm() {
             required: "Password is required",
             pattern: {
               value: PASSWORD_REGEX,
-              message:
-                "Password must be at least 8 characters long, at least one uppercase letter, one lowercase letter, one digit, and one special character from @$!%*?&",
+              message: "Password regex",
             },
           }}
           render={({ field }) => (
             <FormItem>
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder={"Password"}
                 className="w-full"
                 {...field}
               />
@@ -108,7 +109,7 @@ function LoginForm() {
             className="mr-2 bg-inputColor w-[20px] h-[20px] flex justify-center items-center rounded"
           />
           <label htmlFor="save-account" className="text-sm">
-            Remember me
+            {"Remember me"}
           </label>
         </div>
 
@@ -118,7 +119,7 @@ function LoginForm() {
           className="w-full"
           isLoading={isPending}
         >
-          <span className="text-regular">Login</span>
+          <span className="text-regular">{"Login"}</span>
         </Button>
       </form>
     </FormProvider>

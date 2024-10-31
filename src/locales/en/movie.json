@@ -1,0 +1,19 @@
+{
+  "Create a new movie": "Create a new movie",
+  "Edit": "Edit",
+  "Drop an image here": "Drop an image here",
+  "Drop other image here": "Drop other image here",
+  "Title": "Title",
+  "Publishing year": "Publishing year",
+  "Cancel": "Cancel",
+  "Submit": "Submit",
+  "Update": "Update",
+  "Email is required": "Email is required",
+  "Password is required": "Password is required",
+  "Invalid email": "Invalid email",
+  "Movie added successfully": "Movie added successfully",
+  "Movie edited successfully": "Movie edited successfully",
+  "Poster is required": "Poster is required",
+  "Title is required": "Title is required",
+  "Publishing year is required": "Publishing year is required"
+}

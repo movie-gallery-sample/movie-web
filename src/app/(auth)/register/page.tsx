@@ -1,7 +1,9 @@
 import Link from "next/link";
 import SignUpForm from "../../../components/auth/SignUpForm";
+// import { useTranslation } from "react-i18next";
 
 function RegisterPage() {
+  // const { t } = useTranslation("auth");
   return (
     <div className="flex flex-col items-center text-white sm:w-[300px] max-sm:w-full max-sm:px-6">
       <h1 className="text-3xl font-semibold mb-2">Create Account</h1>

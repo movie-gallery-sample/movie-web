@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 type VariantType = "contained-primary";
 
 type ButtonProps = {
@@ -33,6 +35,7 @@ export const Button = (props: ButtonProps) => {
   };
 
   const variantType = (variant + "-" + color) as VariantType;
+  const { t } = useTranslation("Button");
 
   return (
     <button
@@ -43,7 +46,7 @@ export const Button = (props: ButtonProps) => {
     >
       {isLoading ? (
         <div className="pl-2">
-          <span className="text-regular pl-2">Loading...</span>
+          <span className="text-regular pl-2">{t("Loading")}...</span>
         </div>
       ) : (
         children

@@ -6,7 +6,14 @@ import { Toaster } from "sonner";
 import AuthProvider from "./AuthProvider";
 type Props = { children: ReactNode };
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    },
+  },
+});
 
 export default function Provider({ children }: Props) {
   return (

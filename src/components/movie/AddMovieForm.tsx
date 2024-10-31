@@ -17,6 +17,8 @@ import { YEAR_REGEX } from "@/lib/constants";
 
 import Spinner from "../Spinner";
 import { useParams } from "next/navigation";
+// import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 type Props = {
   isEdit?: boolean;
@@ -24,6 +26,8 @@ type Props = {
 
 function AddMovieForm(props: Props) {
   const { isEdit } = props;
+  // const { t } = useTranslation("movie");
+  const router = useRouter();
   const { id } = useParams();
   const [file, setFile] = useState<FileUpload | null>(null);
   const form = useForm({
@@ -130,7 +134,7 @@ function AddMovieForm(props: Props) {
   return (
     <>
       {isEdit && form.formState.isLoading ? (
-        <Spinner />
+        <Spinner className="m-auto" />
       ) : (
         <FormProvider {...form}>
           <form className="flex flex-col m-auto w-full md:flex-row gap-6 md:gap-10 lg:gap-[120px] ">
@@ -147,6 +151,7 @@ function AddMovieForm(props: Props) {
                       file={file}
                       setFile={setFile}
                       disabled={isPending || isEditing}
+                      placeholder={isEdit ? "Drop other image here" : undefined}
                     />
                     <FormMessage />
                   </FormItem>
@@ -165,7 +170,7 @@ function AddMovieForm(props: Props) {
                   <FormItem>
                     <Input
                       type="text"
-                      placeholder="Title"
+                      placeholder={"Title"}
                       disabled={isPending || isEditing}
                       {...field}
                     />
@@ -188,7 +193,7 @@ function AddMovieForm(props: Props) {
                   <FormItem className="md:w-2/3 :w-full">
                     <Input
                       type="text"
-                      placeholder="Publishing year"
+                      placeholder={"Publishing year"}
                       disabled={isPending || isEditing}
                       {...field}
                     />
@@ -210,6 +215,9 @@ function AddMovieForm(props: Props) {
                         file={file}
                         setFile={setFile}
                         disabled={isPending || isEditing}
+                        placeholder={
+                          isEdit ? "Drop other image here" : undefined
+                        }
                       />
                       <FormMessage />
                     </FormItem>
@@ -225,11 +233,10 @@ function AddMovieForm(props: Props) {
                   className="!font-bold w-full"
                   disabled={isPending || isEditing}
                   onClick={() => {
-                    form.reset();
-                    setFile(null);
+                    router.back();
                   }}
                 >
-                  <span>Cancel</span>
+                  <span>{"Cancel"}</span>
                 </Button>
                 <Button
                   type="button"
@@ -237,7 +244,7 @@ function AddMovieForm(props: Props) {
                   disabled={isPending || isEditing}
                   onClick={form.handleSubmit(onSubmit)}
                 >
-                  <span>Submit</span>
+                  <span>{"Submit"}</span>
                 </Button>
               </div>
             </div>

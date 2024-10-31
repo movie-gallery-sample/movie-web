@@ -1,0 +1,42 @@
+{
+  "Auth": {
+    "Email": "Email",
+    "Password": "Password",
+    "Confirmation": "Confirmation",
+    "Remember me": "Remember me",
+    "Do not have an account?": "Do not have an account?",
+    "Already have an account?": "Already have an account",
+    "Login": "Login",
+    "Log in": "Log in",
+    "Sign in": "Sign in",
+    "Register": "Register",
+    "Sign up": "Sign up",
+    "Create an account": "Create an account",
+    "Email is required": "Email is required",
+    "Password is required": "Password is required",
+    "Invalid email": "Invalid email",
+    "Password regex": "Password must be at least 8 characters long, at least one uppercase letter, one lowercase letter, one digit, and one special character from @$!%*?&",
+    "Password must be at least 8 characters": "Password must be at least 8 characters",
+    "Confirmation password is required": "Confirmation password is required",
+    "Confirmation password is incorrect": "Confirmation password is incorrect"
+  },
+  "Homepage": {
+    "My movies": "My movies",
+    "Your movie list is empty": "Your movie list is empty",
+    "Add a new movie": "Add a new movie",
+    "Logout": "Logout"
+  },
+  "Movie": {
+   },
+  "Button": {
+    "Loading": "Loading"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, en {English} vi {Vietnamese} other {Unknown}}"
+  },
+  "Pagination": {
+    "Prev": "Prev",
+    "Next": "Next"
+  }
+}
