@@ -1,0 +1,34 @@
+{
+    "Credential": {
+        "Email": "Email",
+        "Password": "Password",
+        "Confirmation": "Confirmation",
+        "Remember me": "Remember me",
+        "Do not have an account?": "Do not have an account?",
+        "Already have an account?": "Already have an account", 
+        "Login": "Login",
+        "Log in": "Log in",
+        "Sign in": "Sign in",
+        "Register": "Register",
+        "Sign up": "Sign up",
+        "Create an account": "Create an account",
+        "Logout": "Logout"
+    },
+    "Homepage": {
+        "My movies": "My movies",
+        "Your movie list is empty": "Your movie list is empty",
+        "Add a new movie": "Add a new movie",
+        "Prev": "Prev",
+        "Next": "Next"
+    },
+    "Handle a movie": {
+        "Create a new movie": "Create a new movie",
+        "Drop an image here": "Drop an image here",
+        "Drop other image here": "Drop other image here",
+        "Title": "Title",
+        "Publishing year": "Publishing year",
+        "Cancel": "Cancel",
+        "Submit": "Submit",
+        "Update": "Update"
+    }
+}
