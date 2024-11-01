@@ -28,6 +28,16 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Pull latest changes on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DEPLOYMENT_HOST }}
+          username: ${{ secrets.DEPLOYMENT_USERNAME }}
+          key: ${{ secrets.DEPLOYMENT_PRIVATE_KEY }}
+          script: |
+            cd /var/www/demo.lettutor.com/movie-web
+            git pull origin main
+
       - name: Archive build files
         run: tar -czf build.tar.gz .next public package.json
 
