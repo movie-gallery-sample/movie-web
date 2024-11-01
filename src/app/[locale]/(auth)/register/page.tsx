@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignUpForm from "../../../components/auth/SignUpForm";
+import SignUpForm from "../../../../components/auth/SignUpForm";
 
 function RegisterPage() {
   return (
