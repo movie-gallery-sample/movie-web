@@ -17,12 +17,14 @@ import { YEAR_REGEX } from "@/lib/constants";
 
 import Spinner from "../Spinner";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type Props = {
   isEdit?: boolean;
 };
 
 function AddMovieForm(props: Props) {
+  const t = useTranslations("Movie");
   const { isEdit } = props;
   const { id } = useParams();
   const [file, setFile] = useState<FileUpload | null>(null);
@@ -64,7 +66,7 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies"] });
-      toast.success("Movie added successfully");
+      toast.success(t("Movie added successfully"));
       form.reset();
       setFile(null);
     },
@@ -86,7 +88,7 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies", id] });
-      toast.success("Movie edited successfully");
+      toast.success(t("Movie edited successfully"));
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -110,7 +112,7 @@ function AddMovieForm(props: Props) {
     if (!form.getValues("posterUrl")) {
       return form.setError("posterUrl", {
         type: "custom",
-        message: "Poster is required",
+        message: t("Poster is required"),
       });
     }
 
@@ -139,7 +141,7 @@ function AddMovieForm(props: Props) {
                 control={form.control}
                 name="posterUrl"
                 rules={{
-                  required: "Poster is required",
+                  required: t("Poster is required"),
                 }}
                 render={() => (
                   <FormItem>
@@ -159,13 +161,13 @@ function AddMovieForm(props: Props) {
                 control={form.control}
                 name="title"
                 rules={{
-                  required: "Title is required",
+                  required: t("Title is required"),
                 }}
                 render={({ field }) => (
                   <FormItem>
                     <Input
                       type="text"
-                      placeholder="Title"
+                      placeholder={t("Title")}
                       disabled={isPending || isEditing}
                       {...field}
                     />
@@ -178,17 +180,17 @@ function AddMovieForm(props: Props) {
                 control={form.control}
                 name="publishingYear"
                 rules={{
-                  required: "Publishing year is required",
+                  required: t("Publishing year is required"),
                   pattern: {
                     value: YEAR_REGEX,
-                    message: "Invalid year",
+                    message: t("Invalid year"),
                   },
                 }}
                 render={({ field }) => (
                   <FormItem className="md:w-2/3 :w-full">
                     <Input
                       type="text"
-                      placeholder="Publishing year"
+                      placeholder={t("Publishing year")}
                       disabled={isPending || isEditing}
                       {...field}
                     />
@@ -202,7 +204,7 @@ function AddMovieForm(props: Props) {
                   control={form.control}
                   name="posterUrl"
                   rules={{
-                    required: "Poster is required",
+                    required: t("Poster is required"),
                   }}
                   render={() => (
                     <FormItem>
@@ -229,7 +231,7 @@ function AddMovieForm(props: Props) {
                     setFile(null);
                   }}
                 >
-                  <span>Cancel</span>
+                  <span>{t("Cancel")}</span>
                 </Button>
                 <Button
                   type="button"
@@ -237,7 +239,7 @@ function AddMovieForm(props: Props) {
                   disabled={isPending || isEditing}
                   onClick={form.handleSubmit(onSubmit)}
                 >
-                  <span>Submit</span>
+                  <span>{isEdit ? t("Update") : t("Submit")}</span>
                 </Button>
               </div>
             </div>

@@ -8,14 +8,16 @@ import Spinner from "@/components/Spinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { CirclePlus, LogOut } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { MoviesResult } from "@/types/movie";
 import { authApi } from "@/features/auth/authApi";
 import { AuthContext } from "@/components/provider/AuthProvider";
+import { useTranslations } from "next-intl";
 
 function MoviesList() {
+  const t = useTranslations("Homepage");
   const { logout: clientLogout } = useContext(AuthContext);
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
@@ -61,13 +63,13 @@ function MoviesList() {
           {!movies?.length ? (
             <div className="text-center px-6">
               <h3 className="md:text-4xl font-semibold mb-10">
-                Your movie list is empty
+                {t("Your movie list is empty")}
               </h3>
               <Button
                 className="w-auto m-auto max-md:w-full"
                 onClick={() => router.push("/movies/add")}
               >
-                Add a new movie
+                {t("Add a new movie")}
               </Button>
             </div>
           ) : (
@@ -75,7 +77,7 @@ function MoviesList() {
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row items-center gap-3">
                   <h3 className="max-xs:text-3xl md:text-4xl font-semibold">
-                    Your movies
+                    {t("My movies")}
                   </h3>
                   <button
                     onClick={() => {
@@ -91,7 +93,9 @@ function MoviesList() {
                   onClick={() => logout()}
                   className="flex flex-row items-center gap-3  text-center translate-y-[12.5%]"
                 >
-                  <p className="text-regular font-bold max-sm:hidden">Logout</p>
+                  <p className="text-regular font-bold max-sm:hidden">
+                    {t("Logout")}
+                  </p>
                   <LogOut className="w-[24px] h-[24px] md:w-[32px] md:h-[32px]" />
                 </button>
               </div>

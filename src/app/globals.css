@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/violet.css";
+
 :root {
   --primary: #2bd17e;
   --primary-hover: #45e890;
@@ -114,4 +119,95 @@ input::placeholder {
   100% {
     opacity: 1;
   }
+}
+
+/* reset */
+/* button {
+  all: unset;
+} */
+
+.SelectTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 15px;
+  font-size: 13px;
+  line-height: 1;
+  height: 35px;
+  width: fit-content;
+  gap: 5px;
+  background-color: var(--background);
+  color: white;
+}
+.SelectTrigger:hover {
+  color: black;
+  background-color: var(--mauve-3);
+}
+
+.SelectTrigger:hover .SelectIcon {
+  color: black;
+}
+
+.SelectTrigger[data-placeholder]:hover {
+  color: black;
+}
+
+.SelectTrigger:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.SelectTrigger[data-placeholder] {
+  color: white;
+}
+
+.SelectIcon {
+  color: white;
+}
+
+.SelectContent {
+  overflow: hidden;
+  background-color: var(--cardColor);
+  border-radius: 6px;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.SelectViewport {
+  padding: 5px;
+}
+
+.SelectItem {
+  font-size: 13px;
+  line-height: 1;
+  color: white;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  position: relative;
+  user-select: none;
+}
+.SelectItem[data-disabled] {
+  color: black;
+  pointer-events: none;
+}
+.SelectItem[data-highlighted] {
+  outline: none;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.SelectLabel {
+  padding: 0 25px;
+  font-size: 12px;
+  line-height: 25px;
+  color: var(--primary);
+}
+
+.SelectSeparator {
+  height: 1px;
+  background-color: var(--violet-6);
+  margin: 5px;
 }

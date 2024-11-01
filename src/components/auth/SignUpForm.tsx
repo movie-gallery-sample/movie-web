@@ -7,11 +7,13 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from "@/lib/constants";
 import { SignUpPayload, SignUpResponseResult } from "@/types/auth";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 function SignUpForm() {
+  const t = useTranslations("Auth");
   const form = useForm({
     mode: "onSubmit",
     defaultValues: {
@@ -56,15 +58,20 @@ function SignUpForm() {
           control={form.control}
           name="email"
           rules={{
-            required: "Email is required",
+            required: t("Email is required"),
             pattern: {
               value: EMAIL_REGEX,
-              message: "Invalid email",
+              message: t("Invalid email"),
             },
           }}
           render={({ field }) => (
             <FormItem>
-              <Input type="email" placeholder="Email" color="red" {...field} />
+              <Input
+                type="email"
+                placeholder={t("Email")}
+                color="red"
+                {...field}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -73,22 +80,21 @@ function SignUpForm() {
           control={form.control}
           name="password"
           rules={{
-            required: "Password is required",
+            required: t("Password is required"),
             minLength: {
               value: 8,
-              message: "Password must be at least 8 characters",
+              message: t("Password must be at least 8 characters"),
             },
             pattern: {
               value: PASSWORD_REGEX,
-              message:
-                "Password must be at least 8 characters long, at least one uppercase letter, one lowercase letter, one digit, and one special character from @$!%*?&",
+              message: t("Password regex"),
             },
           }}
           render={({ field }) => (
             <FormItem>
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder={t("Password")}
                 className="w-full"
                 {...field}
               />
@@ -101,15 +107,15 @@ function SignUpForm() {
           control={form.control}
           name="confirmPassword"
           rules={{
-            required: "Confirmation password is required",
+            required: t("Confirmation password is required"),
             validate: (value: string) =>
-              value === password || "Confirmation password is incorrect",
+              value === password || t("Confirmation password is incorrect"),
           }}
           render={({ field }) => (
             <FormItem>
               <Input
                 type="password"
-                placeholder="Confirmation"
+                placeholder={t("Confirmation")}
                 className="w-full"
                 {...field}
               />
@@ -124,7 +130,7 @@ function SignUpForm() {
           className="w-full"
           isLoading={isPending}
         >
-          <span className="text-regular">Register</span>
+          <span className="text-regular">{t("Register")}</span>
         </Button>
       </form>
     </FormProvider>

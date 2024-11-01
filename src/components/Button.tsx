@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 type VariantType = "contained-primary";
 
 type ButtonProps = {
@@ -14,6 +16,7 @@ type ButtonProps = {
 };
 
 export const Button = (props: ButtonProps) => {
+  const t = useTranslations("Button");
   const {
     children,
     className,
@@ -43,7 +46,7 @@ export const Button = (props: ButtonProps) => {
     >
       {isLoading ? (
         <div className="pl-2">
-          <span className="text-regular pl-2">Loading...</span>
+          <span className="text-regular pl-2">{t("Loading")}...</span>
         </div>
       ) : (
         children

@@ -1,9 +1,10 @@
-import { useTranslations } from 'next-intl';
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import LoginForm from "../../../../components/auth/LoginForm";
+import { Link } from "@/i18n/routing";
 
 function LoginPage() {
-  const t = useTranslations('Credential');
+  const t = useTranslations("Auth");
 
   return (
     <div className="flex flex-col items-center text-white sm:w-[300px] max-sm:w-full max-sm:px-6">

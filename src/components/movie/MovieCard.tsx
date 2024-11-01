@@ -1,7 +1,7 @@
 import Image from "next/image";
 import MoviePoster from "../../../public/assets/poster01.png";
 import { Movie } from "@/types/movie";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 
 function MovieCard(props: Movie) {
   return (
@@ -11,7 +11,7 @@ function MovieCard(props: Movie) {
     >
       <Image
         src={MoviePoster}
-        alt="Bold typography"
+        alt="poster"
         style={{
           display: "block",
           objectFit: "cover",

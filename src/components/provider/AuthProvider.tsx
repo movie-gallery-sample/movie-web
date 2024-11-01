@@ -2,7 +2,7 @@
 
 import { setToken } from "@/lib/apiClient/privateClient";
 import { User } from "@/types/auth";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { createContext, useContext, useState } from "react";
 import { queryClient } from ".";
 
