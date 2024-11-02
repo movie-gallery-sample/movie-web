@@ -37,8 +37,9 @@ export default function LocaleSwitcher() {
 
   function onSelectChange(nextLocale: string) {
     startTransition(() => {
-      // @typescript-eslint/ban-ts-comment
-      router.replace({ pathname }, { locale: nextLocale });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      router.replace({ pathname, params }, { locale: nextLocale });
     });
   }
 
