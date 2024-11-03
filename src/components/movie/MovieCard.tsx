@@ -1,5 +1,4 @@
 import Image from "next/image";
-import MoviePoster from "../../../public/assets/poster01.png";
 import { Movie } from "@/types/movie";
 import { Link } from "@/i18n/routing";
 
@@ -10,13 +9,12 @@ function MovieCard(props: Movie) {
       className="flex flex-col gap-4 w-fit min-w-[160px] p-2 rounded-xl bg-cardColor fade-in hover:scale-105 transition-transform duration-300"
     >
       <Image
-        src={MoviePoster}
+        src={props.posterUrl}
         alt="poster"
-        style={{
-          display: "block",
-          objectFit: "cover",
-          borderRadius: "12px",
-        }}
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="w-auto h-[100%] block rounded-lg object-cover"
       />
 
       <div className="grid grid-rows-2 gap-2">

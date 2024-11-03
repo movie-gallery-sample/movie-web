@@ -46,7 +46,7 @@ export default function LocaleSwitcher() {
   return (
     <Select.Root onValueChange={onSelectChange}>
       <Select.Trigger
-        className="SelectTrigger absolute z-10 right-0 top-0 mr-10 mt-6"
+        className="SelectTrigger absolute z-10 right-0 top-0 mr-6 mt-6 md:mr-10 md:mt-6"
         aria-label="Language"
       >
         <Select.Value placeholder={t("locale", { locale })} />
