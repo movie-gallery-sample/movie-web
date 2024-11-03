@@ -9,3 +9,7 @@ export type UploadResult = FileUpload;
 export interface UploadPayload {
   data: FormData;
 }
+
+export interface RemovedFilePayload {
+  file: string;
+}

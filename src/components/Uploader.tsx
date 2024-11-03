@@ -2,11 +2,11 @@
 
 import { uploadApi } from "@/features/file/uploadApi";
 import { cn } from "@/lib/utils";
-import { FileUpload, UploadPayload, UploadResult } from "@/types/file";
+import { FileUpload, RemovedFilePayload, UploadPayload, UploadResult } from "@/types/file";
+import { convertPathToUrl } from "@/utils/uploadfile.utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Download, X } from "lucide-react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -20,15 +20,14 @@ type Props = {
 };
 
 function Uploader(props: Props) {
-  const t = useTranslations("Movie");
-  const {
-    placeholder = t("Drop an image here"),
-    setFile,
-    file,
-    disabled,
-  } = props;
+  const { placeholder = "Drop an image here", setFile, file, disabled } = props;
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [originalFilePath, setOriginalFilePath]= useState<string | undefined>();
+
+  useEffect(() => {
+    setOriginalFilePath(file?.path);
+  }, []);
 
   const { mutate: uploadSingle } = useMutation<
     UploadResult,
@@ -41,17 +40,17 @@ function Uploader(props: Props) {
     },
     onSuccess: (data) => {
       setTimeout(() => {
-        const urlSegments = data?.path?.split("/");
-        const imageUrl = urlSegments
-          ? process.env.NEXT_PUBLIC_API_IMAGE +
-            urlSegments[urlSegments.length - 1]
-          : "";
+        // const urlSegments = data?.path?.split("/");
+        // const imageUrl = urlSegments
+        //   ? process.env.NEXT_PUBLIC_API_IMAGE +
+        //     urlSegments[urlSegments.length - 1]
+        //   : "";
 
         setFile({
           ...data,
-          path: imageUrl,
+          // path: imageUrl,
         });
-        toast.success(t("File uploaded successfully"));
+        toast.success("File uploaded successfully");
       }, 1000);
     },
     onError: (error) => {
@@ -110,6 +109,13 @@ function Uploader(props: Props) {
     }
   }, [fileRejections]);
 
+  const onRemovedPoster = () => {
+    if (!originalFilePath || file?.path && file.path !== originalFilePath) {
+      uploadApi.removedFile({ file: file?.path as string });
+    }
+    setFile(null);
+  }
+
   return (
     <div className="w-[380px] max-xs:w-full lg:w-[472px] m-auto">
       {!file?.path ? (
@@ -136,13 +142,13 @@ function Uploader(props: Props) {
       ) : (
         <div className="relative m-auto w-fit h-fit">
           <button
-            onClick={() => setFile(null)}
+            onClick={onRemovedPoster}
             className="absolute rounded-full top-0 right-0 p-2 m-2 text-cardColor hover:shadow-lg hover:bg-[#e3f5da]"
           >
             <X />
           </button>
           <Image
-            src={file?.path}
+            src={convertPathToUrl(file?.path)}
             alt="poster"
             width={0}
             height={0}

@@ -14,20 +14,21 @@ import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { Movie, MoviePayload } from "@/types/movie";
 import { YEAR_REGEX } from "@/lib/constants";
-
+import { useRouter } from "next/navigation";
 import Spinner from "../Spinner";
 import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import MyModal from "../utils/modals/MyModal";
 
 type Props = {
   isEdit?: boolean;
 };
 
 function AddMovieForm(props: Props) {
-  const t = useTranslations("Movie");
   const { isEdit } = props;
   const { id } = useParams();
+  const router = useRouter()
   const [file, setFile] = useState<FileUpload | null>(null);
+  const [open, setOpen] = useState(false);
   const form = useForm({
     mode: "onSubmit",
     defaultValues: async () => {
@@ -66,8 +67,10 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies"] });
-      toast.success(t("Movie added successfully"));
-      form.reset();
+      toast.success("Movie added successfully");
+      form.setValue("title", undefined);
+      form.setValue("publishingYear", undefined);
+      form.setValue("posterUrl", undefined);
       setFile(null);
     },
     onError: (error) => {
@@ -88,7 +91,9 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies", id] });
-      toast.success(t("Movie edited successfully"));
+      toast.success("Movie edited successfully");
+      setOpen(false);
+      router.push('/movies');
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -108,19 +113,25 @@ function AddMovieForm(props: Props) {
     form.setValue("posterUrl", file.path);
   }, [file, form]);
 
+  const handleUpdateMovie = async () => {
+    const data = form.getValues() as MoviePayload;
+
+    editMovie({
+      ...data,
+      publishingYear: Number(data.publishingYear),
+    });
+  }
+
   const onSubmit = (data: MoviePayload) => {
     if (!form.getValues("posterUrl")) {
       return form.setError("posterUrl", {
         type: "custom",
-        message: t("Poster is required"),
+        message: "Poster is required",
       });
     }
 
     if (isEdit) {
-      editMovie({
-        ...data,
-        publishingYear: Number(data.publishingYear),
-      });
+      setOpen(true);
     } else {
       addMovie({
         ...data,
@@ -134,77 +145,15 @@ function AddMovieForm(props: Props) {
       {isEdit && form.formState.isLoading ? (
         <Spinner />
       ) : (
-        <FormProvider {...form}>
-          <form className="flex flex-col m-auto w-full md:flex-row gap-6 md:gap-10 lg:gap-[120px] ">
-            <div className="max-md:hidden">
-              <FormField
-                control={form.control}
-                name="posterUrl"
-                rules={{
-                  required: t("Poster is required"),
-                }}
-                render={() => (
-                  <FormItem>
-                    <Uploader
-                      file={file}
-                      setFile={setFile}
-                      disabled={isPending || isEditing}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className=" max-xs:w-full lg:w-[362px] flex flex-col gap-y-6">
-              <FormField
-                control={form.control}
-                name="title"
-                rules={{
-                  required: t("Title is required"),
-                }}
-                render={({ field }) => (
-                  <FormItem>
-                    <Input
-                      type="text"
-                      placeholder={t("Title")}
-                      disabled={isPending || isEditing}
-                      {...field}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="publishingYear"
-                rules={{
-                  required: t("Publishing year is required"),
-                  pattern: {
-                    value: YEAR_REGEX,
-                    message: t("Invalid year"),
-                  },
-                }}
-                render={({ field }) => (
-                  <FormItem className="md:w-2/3 :w-full">
-                    <Input
-                      type="text"
-                      placeholder={t("Publishing year")}
-                      disabled={isPending || isEditing}
-                      {...field}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="md:hidden">
+        <>
+          <FormProvider {...form}>
+            <form className="flex flex-col m-auto w-full md:flex-row gap-6 md:gap-10 lg:gap-[120px] ">
+              <div className="max-md:hidden">
                 <FormField
                   control={form.control}
                   name="posterUrl"
                   rules={{
-                    required: t("Poster is required"),
+                    required: "Poster is required",
                   }}
                   render={() => (
                     <FormItem>
@@ -219,32 +168,105 @@ function AddMovieForm(props: Props) {
                 />
               </div>
 
-              <div className="flex justify-between items-center gap-4 mt-[64px]">
-                <Button
-                  type="button"
-                  variant="outlined"
-                  color="white"
-                  className="!font-bold w-full"
-                  disabled={isPending || isEditing}
-                  onClick={() => {
-                    form.reset();
-                    setFile(null);
+              <div className=" max-xs:w-full lg:w-[362px] flex flex-col gap-y-6">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  rules={{
+                    required: "Title is required",
                   }}
-                >
-                  <span>{t("Cancel")}</span>
-                </Button>
-                <Button
-                  type="button"
-                  className="!font-bold w-full"
-                  disabled={isPending || isEditing}
-                  onClick={form.handleSubmit(onSubmit)}
-                >
-                  <span>{isEdit ? t("Update") : t("Submit")}</span>
-                </Button>
+                  render={({ field }) => (
+                    <FormItem>
+                      <Input
+                        type="text"
+                        placeholder="Title"
+                        disabled={isPending || isEditing}
+                        {...field}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="publishingYear"
+                  rules={{
+                    required: "Publishing year is required",
+                    pattern: {
+                      value: YEAR_REGEX,
+                      message: "Invalid year",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <FormItem className="md:w-2/3 :w-full">
+                      <Input
+                        type="text"
+                        placeholder="Publishing year"
+                        disabled={isPending || isEditing}
+                        {...field}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="md:hidden">
+                  <FormField
+                    control={form.control}
+                    name="posterUrl"
+                    rules={{
+                      required: "Poster is required",
+                    }}
+                    render={() => (
+                      <FormItem>
+                        <Uploader
+                          file={file}
+                          setFile={setFile}
+                          disabled={isPending || isEditing}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex justify-between items-center gap-4 mt-[64px]">
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    color="white"
+                    className="!font-bold w-full"
+                    disabled={isPending || isEditing}
+                    onClick={() => { 
+                      router.push('/movies');
+                    }}
+                  >
+                    <span>Cancel</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    className="!font-bold w-full"
+                    disabled={isPending || isEditing}
+                    onClick={form.handleSubmit(onSubmit)}
+                  >
+                    <span>{isEdit ? 'Update' : 'Submit'}</span>
+                  </Button>
+                </div>
               </div>
-            </div>
-          </form>
-        </FormProvider>
+            </form>
+          </FormProvider>
+          { isEdit &&
+            <MyModal
+              title="Update movie?"
+              description="Are you sure you want to update this movie?"
+              open={open}
+              onOpenChange={setOpen}
+              isLoading={isEditing}
+              confirm={handleUpdateMovie}
+            />
+          }
+        </>
       )}
     </>
   );
