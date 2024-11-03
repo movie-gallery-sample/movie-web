@@ -1,0 +1,63 @@
+{
+  "Auth": {
+    "Email": "Email",
+    "Password": "Password",
+    "Confirmation": "Confirmation",
+    "Remember me": "Remember me",
+    "Do not have an account?": "Do not have an account?",
+    "Already have an account?": "Already have an account",
+    "Login": "Login",
+    "Log in": "Log in",
+    "Sign in": "Sign in",
+    "Register": "Register",
+    "Sign up": "Sign up",
+    "Create an account": "Create an account",
+    "Email is required": "Email is required",
+    "Password is required": "Password is required",
+    "Invalid email": "Invalid email",
+    "Password regex": "Password must be at least 8 characters long, at least one uppercase letter, one lowercase letter, one digit, and one special character from @$!%*?&",
+    "Password must be at least 8 characters": "Password must be at least 8 characters",
+    "Confirmation password is required": "Confirmation password is required",
+    "Confirmation password is incorrect": "Confirmation password is incorrect"
+  },
+  "Homepage": {
+    "My movies": "My movies",
+    "Your movie list is empty": "Your movie list is empty",
+    "Add a new movie": "Add a new movie",
+    "Logout": "Logout"
+  },
+  "Movie": {
+    "Create a new movie": "Create a new movie",
+    "Edit": "Edit",
+    "Drop an image here": "Drop an image here",
+    "Drop other image here": "Drop other image here",
+    "Title": "Title",
+    "Publishing year": "Publishing year",
+    "Cancel": "Cancel",
+    "Submit": "Submit",
+    "Update": "Update",
+    "Email is required": "Email is required",
+    "Password is required": "Password is required",
+    "Invalid email": "Invalid email",
+    "Movie added successfully": "Movie added successfully",
+    "Movie edited successfully": "Movie edited successfully",
+    "Poster is required": "Poster is required",
+    "Title is required": "Title is required",
+    "Publishing year is required": "Publishing year is required"
+  },
+  "Button": {
+    "Loading": "Loading"
+  },
+  "LocaleSwitcher": {
+    "Language": "Language",
+    "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}"
+  },
+  "Pagination": {
+    "Prev": "Prev",
+    "Next": "Next"
+  },
+  "NotFound": {
+    "Not found": "Not found",
+    "Unfortunately, we could not find the requested page or resource": "Unfortunately, we could not find the requested page or resource"
+  }
+}

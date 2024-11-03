@@ -1,0 +1,63 @@
+{
+  "Auth": {
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "Confirmation": "Xác nhận mật khẩu",
+    "Remember me": "Ghi nhớ tài khoản",
+    "Do not have an account?": "Chưa có tài khoản?",
+    "Already have an account?": "Đã có tài khoản?",
+    "Login": "Đăng nhập",
+    "Log in": "Đăng nhập",
+    "Sign in": "Đăng nhập",
+    "Register": "Đăng ký",
+    "Sign up": "Đăng ký",
+    "Create an account": "Tạo tài khoản",
+    "Email is required": "Vui lòng nhập email",
+    "Password is required": "Vui lòng nhập mật khẩu",
+    "Invalid email": "Email không hợp lệ",
+    "Password regex": "Mật khẩu dài ít nhất 8 ký tự, ít nhất một chữ cái in hoa, một chữ cái thường, một chữ số, và một ký tự đặc biệt trong số @$!%*?&",
+    "Password must be at least 8 characters": "Mật khẩu dài ít nhất 8 ký tự",
+    "Confirmation password is required": "Vui lòng xác nhận mật khẩu",
+    "Confirmation password is incorrect": "Mật khẩu xác nhận không giống"
+  },
+  "Homepage": {
+    "My movies": "Danh sách phim",
+    "Your movie list is empty": "Chưa có bộ phim nào",
+    "Add a new movie": "Thêm một bộ phim",
+    "Logout": "Đăng xuất"
+  },
+  "Movie": {
+    "Create a new movie": "Tạo một bộ phim",
+    "Edit": "Chỉnh sửa",
+    "Drop an image here": "Thả một ảnh vào đây",
+    "Drop other image here": "Thả ảnh khác vào đây",
+    "Title": "Tên phim",
+    "Publishing year": "Ngày phát hành",
+    "Cancel": "Hủy",
+    "Submit": "Tạo",
+    "Update": "Cập nhật",
+    "Email is required": "Vui lòng nhập email",
+    "Password is required": "Vui lòng nhập mật khẩu",
+    "Invalid email": "Email không hợp lệ",
+    "Movie added successfully": "Thêm phim thành công",
+    "Movie edited successfully": "Chỉnh sửa phim thành công",
+    "Poster is required": "Vui lòng tải ảnh bìa",
+    "Title is required": "Vui lòng nhập tên phim",
+    "Publishing year is required": "Vui lòng nhập năm phát hành"
+  },
+  "Button": {
+    "Loading": "Đang tải"
+  },
+  "Pagination": {
+    "Prev": "Trước",
+    "Next": "Tiếp"
+  },
+  "NotFound": {
+    "Not found": "Không tìm thấy",
+    "Unfortunately, we could not find the requested page or resource": "Không tìm thấy trang hay tài liệu"
+  },
+  "LocaleSwitcher": {
+    "Language": "Ngôn ngữ",
+    "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}"
+  }
+}

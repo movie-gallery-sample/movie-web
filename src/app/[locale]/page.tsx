@@ -1,7 +1,9 @@
 import { redirect } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 
-export default function RootPage() {
+function HomePage() {
   const locale = useLocale();
   redirect({ href: "/login", locale });
 }
+
+export default HomePage;

@@ -6,6 +6,7 @@ import { FileUpload, UploadPayload, UploadResult } from "@/types/file";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Download, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -19,7 +20,13 @@ type Props = {
 };
 
 function Uploader(props: Props) {
-  const { placeholder = "Drop an image here", setFile, file, disabled } = props;
+  const t = useTranslations("Movie");
+  const {
+    placeholder = t("Drop an image here"),
+    setFile,
+    file,
+    disabled,
+  } = props;
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -44,7 +51,7 @@ function Uploader(props: Props) {
           ...data,
           path: imageUrl,
         });
-        toast.success("File uploaded successfully");
+        toast.success(t("File uploaded successfully"));
       }, 1000);
     },
     onError: (error) => {
