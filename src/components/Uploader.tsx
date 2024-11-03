@@ -2,7 +2,7 @@
 
 import { uploadApi } from "@/features/file/uploadApi";
 import { cn } from "@/lib/utils";
-import { FileUpload, RemovedFilePayload, UploadPayload, UploadResult } from "@/types/file";
+import { FileUpload, UploadPayload, UploadResult } from "@/types/file";
 import { convertPathToUrl } from "@/utils/uploadfile.utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";

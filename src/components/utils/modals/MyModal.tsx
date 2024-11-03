@@ -22,7 +22,6 @@ interface MyModalProps {
   cancelBtnText?: string;
   isLoading?: boolean;
   isError?: boolean;
-  error?: any;
   isSuccess?: boolean;
   contentClassName?: string;
   titleClassName?: string;
@@ -41,7 +40,6 @@ export default function MyModal({
   confirmBtnText = 'Yes',
   cancelBtnText = 'No',
   isError,
-  error,
   isSuccess,
   collectionName,
   contentClassName = '',
@@ -80,9 +78,9 @@ export default function MyModal({
           e.preventDefault();
         }}
       >
-        {(isError || error) && displayError ? (
+        {(isError) && displayError ? (
           <MyAlert
-            message={error ? error?.data?.message : 'Something Went Wrong!!'}
+            message={'Something Went Wrong!!'}
           />
         ) : (
           <div className="max-w-full space-y-3 px-6 text-center max-md:text-xs">
@@ -106,7 +104,9 @@ export default function MyModal({
             type="button"
             disabled={isLoading}
             onClick={() => {
-              confirm && confirm();
+              if (confirm) {
+                confirm();
+              }
             }}
             isLoading={isLoading}
           >
