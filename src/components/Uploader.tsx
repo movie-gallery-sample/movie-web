@@ -7,6 +7,7 @@ import { convertPathToUrl } from "@/utils/uploadfile.utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Download, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -21,8 +22,9 @@ type Props = {
 };
 
 function Uploader(props: Props) {
+  const t = useTranslations("Movie");
   const {
-    placeholder = "Drop an image here",
+    placeholder = t("Drop an image here"),
     setFile,
     file,
     disabled,
@@ -59,7 +61,7 @@ function Uploader(props: Props) {
           ...data,
           // path: imageUrl,
         });
-        toast.success("File uploaded successfully");
+        toast.success(t("File uploaded successfully"));
       }, 1000);
     },
     onError: (error) => {
@@ -109,11 +111,13 @@ function Uploader(props: Props) {
   useEffect(() => {
     if (fileRejections.length > 1) {
       toast.error(
-        "Multiple image files detected. Only one image file is allowed!"
+        t("Multiple image files detected. Only one image file is allowed!")
       );
     } else if (fileRejections.length > 0) {
       toast.error(
-        "Please select a valid image file. Type must be 'image/jpeg' or 'image/png"
+        t(
+          "Please select a valid image file. Type must be 'image/jpeg' or 'image/png"
+        )
       );
     }
   }, [fileRejections]);

@@ -63,7 +63,7 @@ export default function LocaleSwitcher() {
               </Select.Label>
               {locales.map((cur) => (
                 <SelectItem key={cur} value={cur}>
-                  {/* {cur.toUpperCase()} */}
+                 
                   {t("locale", { locale: cur })}
                 </SelectItem>
               ))}
