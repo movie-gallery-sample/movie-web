@@ -1,14 +1,15 @@
-import { MyAlert } from '@/components/utils/alerts/MyAlert';
-import { Button } from '@/components/Button';
+import { MyAlert } from "@/components/utils/alerts/MyAlert";
+import { Button } from "@/components/Button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
-} from '@/components/utils/modals/dialog';
-import { cn } from '@/lib/utils';
-import { useEffect, useState } from 'react';
-import { toast } from 'sonner';
+} from "@/components/utils/modals/dialog";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface MyModalProps {
   collectionName?: string;
@@ -37,16 +38,18 @@ export default function MyModal({
   onOpenChange,
   confirm,
   isLoading,
-  confirmBtnText = 'Yes',
-  cancelBtnText = 'No',
+
   isError,
   isSuccess,
   collectionName,
-  contentClassName = '',
-  titleClassName = '',
-  descriptionClassName = '',
+  contentClassName = "",
+  titleClassName = "",
+  descriptionClassName = "",
   body,
+  ...props
 }: MyModalProps) {
+  const t = useTranslations("MyModal");
+  const { confirmBtnText = t("Yes"), cancelBtnText = t("No") } = props;
   const [displayError, setDisplayError] = useState<boolean | undefined>(false);
 
   useEffect(() => {
@@ -61,7 +64,7 @@ export default function MyModal({
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(`Successfully deleted ${collectionName || title}`);
+      toast.success(`${t("Successfully deleted")} ${collectionName || title}`);
     }
   }, [isSuccess]);
 
@@ -70,29 +73,27 @@ export default function MyModal({
       {children}
       <DialogContent
         className={cn(
-          'block max-w-[300px] space-y-6 rounded-xl p-[42px] max-md:block max-md:gap-0 md:max-w-md',
-          contentClassName,
+          "block max-w-[300px] space-y-6 rounded-xl p-[42px] max-md:block max-md:gap-0 md:max-w-md",
+          contentClassName
         )}
         closeIcon={false}
         onInteractOutside={(e) => {
           e.preventDefault();
         }}
       >
-        {(isError) && displayError ? (
-          <MyAlert
-            message={'Something Went Wrong!!'}
-          />
+        {isError && displayError ? (
+          <MyAlert message={"Something Went Wrong!!"} />
         ) : (
           <div className="max-w-full space-y-3 px-6 text-center max-md:text-xs">
             <h3
               className={cn(
-                'text-center text-sm font-medium md:text-base',
-                titleClassName,
+                "text-center text-sm font-medium md:text-base",
+                titleClassName
               )}
             >
               {title}
             </h3>
-            <p className={cn('text-sm text-[#8A8F96]', descriptionClassName)}>
+            <p className={cn("text-sm text-[#8A8F96]", descriptionClassName)}>
               {description}
             </p>
           </div>

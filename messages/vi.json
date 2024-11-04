@@ -43,7 +43,12 @@
     "Movie edited successfully": "Chỉnh sửa phim thành công",
     "Poster is required": "Vui lòng tải ảnh bìa",
     "Title is required": "Vui lòng nhập tên phim",
-    "Publishing year is required": "Vui lòng nhập năm phát hành"
+    "Publishing year is required": "Vui lòng nhập năm phát hành",
+    "Update movie?": "Cập nhật phim?",
+    "Are you sure you want to update this movie?": "Xác nhận cập nhật phim?",
+    "Multiple image files detected. Only one image file is allowed!": "Không thể tải nhiều ảnh cùng lúc!",
+    "Please select a valid image file. Type must be 'image/jpeg' or 'image/png": "Vui lòng tải ảnh hợp lệ. Ảnh phải có đuôi là 'image/jpeg' hoặc 'image/png",
+    "File uploaded successfully": "Tập tin tải lên thành công"
   },
   "Button": {
     "Loading": "Đang tải"
@@ -59,5 +64,10 @@
   "LocaleSwitcher": {
     "Language": "Ngôn ngữ",
     "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}"
+  },
+  "MyModal": {
+    "Successfully deleted": "Xóa thành công",
+    "Yes": "Đồng ý",
+    "No": "Không"
   }
 }

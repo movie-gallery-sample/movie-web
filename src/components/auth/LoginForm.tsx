@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { useAuth } from "../provider/AuthProvider";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 function LoginForm() {
   const t = useTranslations("Auth");
@@ -70,7 +71,12 @@ function LoginForm() {
           }}
           render={({ field }) => (
             <FormItem>
-              <Input type="email" placeholder={t("Email")} {...field} />
+              <Input
+                type="email"
+                placeholder={t("Email")}
+                {...field}
+                className={cn(form.formState?.errors["email"] && "ring-error")}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -90,7 +96,10 @@ function LoginForm() {
               <Input
                 type="password"
                 placeholder={t("Password")}
-                className="w-full"
+                className={cn(
+                  "w-full",
+                  form.formState?.errors["password"] && "ring-error"
+                )}
                 {...field}
               />
               <FormMessage />

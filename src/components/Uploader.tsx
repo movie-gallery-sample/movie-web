@@ -7,6 +7,7 @@ import { convertPathToUrl } from "@/utils/uploadfile.utils";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Download, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
@@ -17,13 +18,23 @@ type Props = {
   file: FileUpload | null;
   setFile: (data: FileUpload | null) => void;
   disabled: boolean;
+  className?: string;
 };
 
 function Uploader(props: Props) {
-  const { placeholder = "Drop an image here", setFile, file, disabled } = props;
+  const t = useTranslations("Movie");
+  const {
+    placeholder = t("Drop an image here"),
+    setFile,
+    file,
+    disabled,
+    className,
+  } = props;
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [originalFilePath, setOriginalFilePath]= useState<string | undefined>();
+  const [originalFilePath, setOriginalFilePath] = useState<
+    string | undefined
+  >();
 
   useEffect(() => {
     setOriginalFilePath(file?.path);
@@ -50,7 +61,7 @@ function Uploader(props: Props) {
           ...data,
           // path: imageUrl,
         });
-        toast.success("File uploaded successfully");
+        toast.success(t("File uploaded successfully"));
       }, 1000);
     },
     onError: (error) => {
@@ -100,28 +111,33 @@ function Uploader(props: Props) {
   useEffect(() => {
     if (fileRejections.length > 1) {
       toast.error(
-        "Multiple image files detected. Only one image file is allowed!"
+        t("Multiple image files detected. Only one image file is allowed!")
       );
     } else if (fileRejections.length > 0) {
       toast.error(
-        "Please select a valid image file. Type must be 'image/jpeg' or 'image/png"
+        t(
+          "Please select a valid image file. Type must be 'image/jpeg' or 'image/png"
+        )
       );
     }
   }, [fileRejections]);
 
   const onRemovedPoster = () => {
-    if (!originalFilePath || file?.path && file.path !== originalFilePath) {
+    if (!originalFilePath || (file?.path && file.path !== originalFilePath)) {
       uploadApi.removedFile({ file: file?.path as string });
     }
     setFile(null);
-  }
+  };
 
   return (
     <div className="w-[380px] max-xs:w-full lg:w-[472px] m-auto">
       {!file?.path ? (
         <div
           {...getRootProps()}
-          className="relative h-[372px] md:h-[500px] flex flex-col items-center justify-center gap-2 bg-inputColor border-2 rounded-[10px] border-white border-dashed text-center"
+          className={cn(
+            "relative h-[372px] md:h-[500px] flex flex-col items-center justify-center gap-2 bg-inputColor border-2 rounded-[10px] border-white border-dashed text-center",
+            className
+          )}
         >
           <input
             {...getInputProps()}

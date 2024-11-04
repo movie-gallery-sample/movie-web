@@ -18,15 +18,18 @@ import { useRouter } from "next/navigation";
 import Spinner from "../Spinner";
 import { useParams } from "next/navigation";
 import MyModal from "../utils/modals/MyModal";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type Props = {
   isEdit?: boolean;
 };
 
 function AddMovieForm(props: Props) {
+  const t = useTranslations("Movie");
   const { isEdit } = props;
   const { id } = useParams();
-  const router = useRouter()
+  const router = useRouter();
   const [file, setFile] = useState<FileUpload | null>(null);
   const [open, setOpen] = useState(false);
   const form = useForm({
@@ -67,7 +70,7 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies"] });
-      toast.success("Movie added successfully");
+      toast.success(t("Movie added successfully"));
       form.setValue("title", undefined);
       form.setValue("publishingYear", undefined);
       form.setValue("posterUrl", undefined);
@@ -91,9 +94,9 @@ function AddMovieForm(props: Props) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies", id] });
-      toast.success("Movie edited successfully");
+      toast.success(t("Movie edited successfully"));
       setOpen(false);
-      router.push('/movies');
+      router.push("/movies");
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -120,13 +123,13 @@ function AddMovieForm(props: Props) {
       ...data,
       publishingYear: Number(data.publishingYear),
     });
-  }
+  };
 
   const onSubmit = (data: MoviePayload) => {
     if (!form.getValues("posterUrl")) {
       return form.setError("posterUrl", {
         type: "custom",
-        message: "Poster is required",
+        message: t("Poster is required"),
       });
     }
 
@@ -153,7 +156,7 @@ function AddMovieForm(props: Props) {
                   control={form.control}
                   name="posterUrl"
                   rules={{
-                    required: "Poster is required",
+                    required: t("Poster is required"),
                   }}
                   render={() => (
                     <FormItem>
@@ -161,6 +164,10 @@ function AddMovieForm(props: Props) {
                         file={file}
                         setFile={setFile}
                         disabled={isPending || isEditing}
+                        className={cn(
+                          "w-full",
+                          form.formState?.errors["posterUrl"] && "border-error"
+                        )}
                       />
                       <FormMessage />
                     </FormItem>
@@ -173,14 +180,18 @@ function AddMovieForm(props: Props) {
                   control={form.control}
                   name="title"
                   rules={{
-                    required: "Title is required",
+                    required: t("Title is required"),
                   }}
                   render={({ field }) => (
                     <FormItem>
                       <Input
                         type="text"
-                        placeholder="Title"
+                        placeholder={t("Title")}
                         disabled={isPending || isEditing}
+                        className={cn(
+                          "w-full",
+                          form.formState?.errors["title"] && "ring-error"
+                        )}
                         {...field}
                       />
                       <FormMessage />
@@ -192,18 +203,23 @@ function AddMovieForm(props: Props) {
                   control={form.control}
                   name="publishingYear"
                   rules={{
-                    required: "Publishing year is required",
+                    required: t("Publishing year is required"),
                     pattern: {
                       value: YEAR_REGEX,
-                      message: "Invalid year",
+                      message: t("Invalid year"),
                     },
                   }}
                   render={({ field }) => (
                     <FormItem className="md:w-2/3 :w-full">
                       <Input
                         type="text"
-                        placeholder="Publishing year"
+                        placeholder={t("Publishing year")}
                         disabled={isPending || isEditing}
+                        className={cn(
+                          "w-full",
+                          form.formState?.errors["publishingYear"] &&
+                            "ring-error"
+                        )}
                         {...field}
                       />
                       <FormMessage />
@@ -216,7 +232,7 @@ function AddMovieForm(props: Props) {
                     control={form.control}
                     name="posterUrl"
                     rules={{
-                      required: "Poster is required",
+                      required: t("Poster is required"),
                     }}
                     render={() => (
                       <FormItem>
@@ -238,11 +254,11 @@ function AddMovieForm(props: Props) {
                     color="white"
                     className="!font-bold w-full"
                     disabled={isPending || isEditing}
-                    onClick={() => { 
-                      router.push('/movies');
+                    onClick={() => {
+                      router.push("/movies");
                     }}
                   >
-                    <span>Cancel</span>
+                    <span>{t("Cancel")}</span>
                   </Button>
                   <Button
                     type="button"
@@ -250,22 +266,22 @@ function AddMovieForm(props: Props) {
                     disabled={isPending || isEditing}
                     onClick={form.handleSubmit(onSubmit)}
                   >
-                    <span>{isEdit ? 'Update' : 'Submit'}</span>
+                    <span>{isEdit ? t("Update") : t("Submit")}</span>
                   </Button>
                 </div>
               </div>
             </form>
           </FormProvider>
-          { isEdit &&
+          {isEdit && (
             <MyModal
-              title="Update movie?"
-              description="Are you sure you want to update this movie?"
+              title={t("Update movie?")}
+              description={t("Are you sure you want to update this movie?")}
               open={open}
               onOpenChange={setOpen}
               isLoading={isEditing}
               confirm={handleUpdateMovie}
             />
-          }
+          )}
         </>
       )}
     </>
