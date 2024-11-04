@@ -11,6 +11,7 @@ import { useRouter } from "@/i18n/routing";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 function SignUpForm() {
   const t = useTranslations("Auth");
@@ -70,6 +71,7 @@ function SignUpForm() {
                 type="email"
                 placeholder={t("Email")}
                 color="red"
+                className={cn(form.formState?.errors["email"] && "ring-error")}
                 {...field}
               />
               <FormMessage />
@@ -95,7 +97,10 @@ function SignUpForm() {
               <Input
                 type="password"
                 placeholder={t("Password")}
-                className="w-full"
+                className={cn(
+                  "w-full",
+                  form.formState?.errors["confirmPassword"] && "ring-error"
+                )}
                 {...field}
               />
               <FormMessage />
@@ -116,7 +121,10 @@ function SignUpForm() {
               <Input
                 type="password"
                 placeholder={t("Confirmation")}
-                className="w-full"
+                className={cn(
+                  "w-full",
+                  form.formState?.errors["confirmPassword"] && "ring-error"
+                )}
                 {...field}
               />
               <FormMessage />

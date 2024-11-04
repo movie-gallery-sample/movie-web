@@ -17,13 +17,22 @@ type Props = {
   file: FileUpload | null;
   setFile: (data: FileUpload | null) => void;
   disabled: boolean;
+  className?: string;
 };
 
 function Uploader(props: Props) {
-  const { placeholder = "Drop an image here", setFile, file, disabled } = props;
+  const {
+    placeholder = "Drop an image here",
+    setFile,
+    file,
+    disabled,
+    className,
+  } = props;
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [originalFilePath, setOriginalFilePath]= useState<string | undefined>();
+  const [originalFilePath, setOriginalFilePath] = useState<
+    string | undefined
+  >();
 
   useEffect(() => {
     setOriginalFilePath(file?.path);
@@ -110,18 +119,21 @@ function Uploader(props: Props) {
   }, [fileRejections]);
 
   const onRemovedPoster = () => {
-    if (!originalFilePath || file?.path && file.path !== originalFilePath) {
+    if (!originalFilePath || (file?.path && file.path !== originalFilePath)) {
       uploadApi.removedFile({ file: file?.path as string });
     }
     setFile(null);
-  }
+  };
 
   return (
     <div className="w-[380px] max-xs:w-full lg:w-[472px] m-auto">
       {!file?.path ? (
         <div
           {...getRootProps()}
-          className="relative h-[372px] md:h-[500px] flex flex-col items-center justify-center gap-2 bg-inputColor border-2 rounded-[10px] border-white border-dashed text-center"
+          className={cn(
+            "relative h-[372px] md:h-[500px] flex flex-col items-center justify-center gap-2 bg-inputColor border-2 rounded-[10px] border-white border-dashed text-center",
+            className
+          )}
         >
           <input
             {...getInputProps()}
