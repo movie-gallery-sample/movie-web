@@ -71,9 +71,7 @@ function AddMovieForm(props: Props) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["movies"] });
       toast.success(t("Movie added successfully"));
-      form.setValue("title", undefined);
-      form.setValue("publishingYear", undefined);
-      form.setValue("posterUrl", undefined);
+      form.reset();
       setFile(null);
     },
     onError: (error) => {
@@ -104,6 +102,8 @@ function AddMovieForm(props: Props) {
       }
     },
   });
+
+  console.log(form.getValues("publishingYear"));
 
   useEffect(() => {
     if (!file) {

@@ -39,6 +39,7 @@
     "Email is required": "Vui lòng nhập email",
     "Password is required": "Vui lòng nhập mật khẩu",
     "Invalid email": "Email không hợp lệ",
+    "Invalid year": "Năm không hợp lệ",
     "Movie added successfully": "Thêm phim thành công",
     "Movie edited successfully": "Chỉnh sửa phim thành công",
     "Poster is required": "Vui lòng tải ảnh bìa",
@@ -46,8 +47,10 @@
     "Publishing year is required": "Vui lòng nhập năm phát hành",
     "Update movie?": "Cập nhật phim?",
     "Are you sure you want to update this movie?": "Xác nhận cập nhật phim?",
-    "Multiple image files detected. Only one image file is allowed!": "Không thể tải nhiều ảnh cùng lúc!",
-    "Please select a valid image file. Type must be 'image/jpeg' or 'image/png": "Vui lòng tải ảnh hợp lệ. Ảnh phải có đuôi là 'image/jpeg' hoặc 'image/png",
+    "Multiple image files detected": "Không thể tải nhiều ảnh cùng lúc",
+    "Only one image file is allowed!": "!",
+    "Please select a valid image file": "Vui lòng tải ảnh hợp lệ",
+    "Type must be 'image/jpeg' or 'image/png": "Ảnh phải có đuôi là 'image/jpeg' hoặc 'image/png",
     "File uploaded successfully": "Tập tin tải lên thành công"
   },
   "Button": {
@@ -63,7 +66,8 @@
   },
   "LocaleSwitcher": {
     "Language": "Ngôn ngữ",
-    "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}"
+    "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}",
+    "flag": "{locale, select, en {us} vi {vn} other {Unknown}}"
   },
   "MyModal": {
     "Successfully deleted": "Xóa thành công",
