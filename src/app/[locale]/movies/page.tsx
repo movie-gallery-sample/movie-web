@@ -79,6 +79,7 @@ function MoviesList() {
                   <h3 className="max-xs:text-3xl md:text-4xl font-semibold">
                     {t("My movies")}
                   </h3>
+
                   <button
                     onClick={() => {
                       router.push("/movies/add");

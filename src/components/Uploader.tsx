@@ -111,13 +111,15 @@ function Uploader(props: Props) {
   useEffect(() => {
     if (fileRejections.length > 1) {
       toast.error(
-        t("Multiple image files detected. Only one image file is allowed!")
+        t("Multiple image files detected") +
+          ". " +
+          t("Only one image file is allowed!")
       );
     } else if (fileRejections.length > 0) {
       toast.error(
-        t(
-          "Please select a valid image file. Type must be 'image/jpeg' or 'image/png"
-        )
+        t("Please select a valid image file") +
+          ". " +
+          t("Type must be 'image/jpeg' or 'image/png")
       );
     }
   }, [fileRejections]);

@@ -39,6 +39,7 @@
     "Email is required": "Email is required",
     "Password is required": "Password is required",
     "Invalid email": "Invalid email",
+    "Invalid year": "Invalid year",
     "Movie added successfully": "Movie added successfully",
     "Movie edited successfully": "Movie edited successfully",
     "Poster is required": "Poster is required",
@@ -46,8 +47,10 @@
     "Publishing year is required": "Publishing year is required",
     "Update movie?": "Update movie?",
     "Are you sure you want to update this movie?": "Are you sure you want to update this movie?",
-    "Multiple image files detected. Only one image file is allowed!": "Multiple image files detected. Only one image file is allowed!",
-    "Please select a valid image file. Type must be 'image/jpeg' or 'image/png": "Please select a valid image file. Type must be 'image/jpeg' or 'image/png",
+    "Multiple image files detected": "Multiple image files detected. Only one image file is allowed",
+    "Only one image file is allowed!": "!",
+    "Please select a valid image file": "Please select a valid image file",
+    "Type must be 'image/jpeg' or 'image/png": "Type must be 'image/jpeg' or 'image/png",
     "File uploaded successfully": "File uploaded successfully"
   },
   "Button": {
@@ -55,7 +58,8 @@
   },
   "LocaleSwitcher": {
     "Language": "Language",
-    "locale": "{locale, select, en {English} vi {Tiếng Việt} other {Unknown}}"
+    "locale": "{locale, select, en { English}  vi { Tiếng Việt} other {Unknown}}",
+    "flag": "{locale, select, en {us} vi {vn} other {Unknown}}"
   },
   "Pagination": {
     "Prev": "Prev",
